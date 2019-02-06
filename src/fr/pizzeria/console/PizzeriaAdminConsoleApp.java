@@ -1,12 +1,17 @@
 package fr.pizzeria.console;
 
 import java.util.Scanner;
+/**
+ * 
+ * @author cherif
+ *
+ */
 
 public class PizzeriaAdminConsoleApp {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		// TODO Auto-generated method stub
+		
+		
 		Scanner choiceMenu = new Scanner(System.in);
 		Scanner reader = new Scanner(System.in);
 		Pizza p1= new Pizza(0,"REP","Peperoni",12.5);
@@ -17,7 +22,9 @@ public class PizzeriaAdminConsoleApp {
 		Pizza p6= new Pizza(5,"SAV","La savoyarde",13.0);
 		Pizza p7= new Pizza(6,"ORI","L’orientale",13.5);
 		Pizza p8= new Pizza(7,"IND","L’indienne",14.0);
-
+		
+        /** creation de tableau d'objet**/ 
+		
 		Pizza[] pizzashop = {p1,p2,p3,p4,p5,p6,p7,p8} ;
 		int choice = 0;
 
@@ -29,7 +36,10 @@ public class PizzeriaAdminConsoleApp {
 			System.out.println("99. Sortir");
 
 			choice = choiceMenu.nextInt();
-
+			
+			
+          /** affichage de tous les pizza **/
+			
 			if (choice == 1){
 				System.out.println("Liste des pizzas :");
 				for(int i=0;i<pizzashop.length;i++){
@@ -39,7 +49,9 @@ public class PizzeriaAdminConsoleApp {
 
 
 
-			} else if (choice == 2){
+			}
+			/**l ajout d une pizza dans un tableau **/
+			else if (choice == 2){
 
 				System.out.println("Ajout d’une nouvelle pizza");
 
@@ -61,7 +73,7 @@ public class PizzeriaAdminConsoleApp {
 				pizzashop = newArray;
 
 			} 
-
+			/**la mise ajour d'une pizza **/
 			else if (choice == 3){
 				System.out.println("Mise à jour d’une pizza");
 				System.out.println("Liste des pizzas :");
@@ -97,7 +109,7 @@ public class PizzeriaAdminConsoleApp {
 
 
 
-			}	
+			}	/**la supression d'une pizza **/
 			else if (choice == 4){
 				System.out.println("Suppression d’une pizza");
 
@@ -107,15 +119,17 @@ public class PizzeriaAdminConsoleApp {
 				int iTemp = 0;
 				for(int i = 0; i< pizzashop.length; i++){
 
-					if(!(pizzashop[i].code).equals(idps)){ 
-						pizzashop[i]=pizzashop[iTemp];
+					if(!(pizzashop[i].code).equals(idps)){
+						
+						pizzashop[i]=pizzashop[iTemp+1];
+						
 						iTemp++;
 					}
 
 				} 
 				
 				
-			}else if (choice == 99){
+			} /**quitter l application **/ else if (choice == 99){
 				System.out.println("Aurevoir ☹»");
 
 			}

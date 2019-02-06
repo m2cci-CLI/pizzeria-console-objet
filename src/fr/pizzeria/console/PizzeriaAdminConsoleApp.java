@@ -115,19 +115,23 @@ public class PizzeriaAdminConsoleApp {
 
 				System.out.println("Veuillez choisir le code de la pizza à supprimer ");
 				String idps=reader.nextLine();
-
+				
+				
+                Pizza[] arrayTemp = new Pizza[pizzashop.length-1];
+				
 				int iTemp = 0;
 				for(int i = 0; i< pizzashop.length; i++){
 
 					if(!(pizzashop[i].code).equals(idps)){
 						
-						pizzashop[i]=pizzashop[iTemp+1];
+						 arrayTemp[iTemp] = pizzashop[i];
+	                        iTemp ++;
 						
-						iTemp++;
+						
 					}
 
 				} 
-				
+				pizzashop = arrayTemp;
 				
 			} /**quitter l application **/ else if (choice == 99){
 				System.out.println("Aurevoir ☹»");

@@ -1,6 +1,10 @@
 package fr.pizzeria.console;
 
 import java.util.Scanner;
+
+import fr.operateurs.dao.IPizzaDao;
+import fr.operateurs.dao.PizzaMemDao;
+import fr.operateurs.model.Pizza;
 /**
  * 
  * @author cherif
@@ -10,10 +14,8 @@ import java.util.Scanner;
 public class PizzeriaAdminConsoleApp {
 
 	public static void main(String[] args) {
+		IPizzaDao pizzaDao = new PizzaMemDao();
 		
-		
-		Scanner choiceMenu = new Scanner(System.in);
-		Scanner reader = new Scanner(System.in);
 		Pizza p1= new Pizza(0,"REP","Peperoni",12.5);
 		Pizza p2= new Pizza(1,"MAR","Margherita",14.0);
 		Pizza p3= new Pizza(2,"REIN","La Reine",11.5);
@@ -25,7 +27,20 @@ public class PizzeriaAdminConsoleApp {
 		
         /** creation de tableau d'objet**/ 
 		
-		Pizza[] pizzashop = {p1,p2,p3,p4,p5,p6,p7,p8} ;
+		
+		
+		pizzaDao.saveNewPizza(p1);
+		pizzaDao.saveNewPizza(p2);
+		pizzaDao.saveNewPizza(p3);
+		pizzaDao.saveNewPizza(p4);
+		pizzaDao.saveNewPizza(p5);
+		pizzaDao.saveNewPizza(p6);
+		pizzaDao.saveNewPizza(p7);
+		
+		Scanner choiceMenu = new Scanner(System.in);
+		
+		Scanner reader = new Scanner(System.in);
+	
 		int choice = 0;
 
 		while (true) {
@@ -41,14 +56,11 @@ public class PizzeriaAdminConsoleApp {
           /** affichage de tous les pizza **/
 			
 			if (choice == 1){
-				System.out.println("Liste des pizzas :");
-				for(int i=0;i<pizzashop.length;i++){
-
-					System.out.println(pizzashop[i].code+"->"+pizzashop[i].libelle+"("+pizzashop[i].prix+"€)");
+			
+				for (int i = 0; i < pizzaDao.findAllPizzas().length; i++) {
+					System.out.println(pizzaDao.findAllPizzas()[i]);
 				}
-
-
-
+				
 			}
 			/**l ajout d une pizza dans un tableau **/
 			else if (choice == 2){
@@ -56,82 +68,52 @@ public class PizzeriaAdminConsoleApp {
 				System.out.println("Ajout d’une nouvelle pizza");
 
 				System.out.println("Veuillez saisir le code : ");
-				String idp=reader.nextLine();
+				String idPizza=reader.nextLine();
 				System.out.println("Veuillez saisir le nom (sans espace) :");
-				String nomp=reader.nextLine();
+				String nomPizza=reader.nextLine();
 				System.out.println("Veuillez saisir le prix :");
-				double  prixp= reader.nextDouble();
-
-				Pizza p9= new Pizza(pizzashop.length, idp,nomp,prixp);
-
-				Pizza[] newArray = new Pizza[pizzashop.length+1];
-
-				for(int i = 0; i< pizzashop.length; i++){
-					newArray[i] = pizzashop[i];
-				}
-				newArray[pizzashop.length] = p9;
-				pizzashop = newArray;
+				double  prixPizza= reader.nextDouble();
+                Pizza newPizza= new Pizza( idPizza,nomPizza,prixPizza);
+                pizzaDao.saveNewPizza(newPizza);
 
 			} 
+			
+			
 			/**la mise ajour d'une pizza **/
 			else if (choice == 3){
 				System.out.println("Mise à jour d’une pizza");
 				System.out.println("Liste des pizzas :");
-				for(int i=0;i<pizzashop.length;i++){
+				
+				pizzaDao.toString();
 
-					System.out.println(pizzashop[i].code+"->"+pizzashop[i].libelle+"("+pizzashop[i].prix+"€)");
-
-				}
-
-				System.out.println("Veuillez choisir le code de la pizza à modifier: ");
-				String idpf=reader.nextLine();
+				System.out.println("Veuillez saisir le code a du pizza a modifier  : ");
+				String idModifier=reader.nextLine();
+				
 
 				System.out.println("Veuillez saisir le code : ");
-				String idpm=reader.nextLine();
+				String iddModifier=reader.nextLine();
+				
 				System.out.println("Veuillez saisir le nom (sans espace) :");
-				String nompm=reader.nextLine();
+				String nomModifier=reader.nextLine();
+				
 				System.out.println("Veuillez saisir le prix :");
-				double  prixpm= reader.nextDouble();
+				double  prixModifier= reader.nextDouble();
+				
+				Pizza Pizzamiseajour= new Pizza( iddModifier,nomModifier,prixModifier);
 
 
-				for(int i=0;i<pizzashop.length;i++){
-
-					if(pizzashop[i].code.equals(idpf)){
-
-						pizzashop[i].code=idpm;
-						pizzashop[i].libelle=nompm;
-						pizzashop[i].prix=prixpm;
-
-
-					}
-				}
-
-
-
+				pizzaDao.updatePizza(idModifier, Pizzamiseajour);
 
 			}	/**la supression d'une pizza **/
 			else if (choice == 4){
 				System.out.println("Suppression d’une pizza");
 
 				System.out.println("Veuillez choisir le code de la pizza à supprimer ");
-				String idps=reader.nextLine();
+				String idSuprimer=reader.nextLine();
 				
-				
-                Pizza[] arrayTemp = new Pizza[pizzashop.length-1];
-				
-				int iTemp = 0;
-				for(int i = 0; i< pizzashop.length; i++){
-
-					if(!(pizzashop[i].code).equals(idps)){
-						
-						 arrayTemp[iTemp] = pizzashop[i];
-	                        iTemp ++;
-						
-						
-					}
-
-				} 
-				pizzashop = arrayTemp;
+				if(pizzaDao.pizzaExists(idSuprimer))
+					
+				pizzaDao.deletePizza(idSuprimer);
 				
 			} /**quitter l application **/ else if (choice == 99){
 				System.out.println("Aurevoir ☹»");

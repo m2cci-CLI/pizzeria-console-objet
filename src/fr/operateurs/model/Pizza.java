@@ -1,14 +1,23 @@
-package fr.pizzeria.console;
+package fr.operateurs.model;
 
-public class Pizza {
 
-	public int id;
+public class Pizza  {
+public int id;
 	
 	public String code ;
 	
 	public String libelle;
 	
 	public double prix;
+
+
+	
+	public String toString(){
+
+		return this.code+"->"+this.libelle+"("+this.prix+"€)";
+		
+	}
+	
 
 	public Pizza(String code, String libelle, double prix) {
 	
@@ -24,15 +33,9 @@ public class Pizza {
 		this.libelle = libelle;
 		this.prix = prix;
 	}
+
+
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	
 }

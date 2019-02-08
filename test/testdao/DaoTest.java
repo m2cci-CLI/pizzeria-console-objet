@@ -20,7 +20,7 @@ public class DaoTest {
 		assertTrue("Dao est",dao.findAllPizzas().isEmpty());
 		//on ajoute une pizza
 		dao.saveNewPizza(new Pizza(5, "test", "mabiza", 12));
-		//on verifier que la pizza est bien dans la Dao
+		//on verifier que  la pizza est bien dans la Dao
 		assertTrue("je n ai pas retrouver la pizza",dao.pizzaExists("test"));	
 	}
 	@Test

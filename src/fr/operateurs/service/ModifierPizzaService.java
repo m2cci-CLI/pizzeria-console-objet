@@ -4,10 +4,12 @@ import java.util.Scanner;
 
 import fr.operateurs.dao.IPizzaDao;
 import fr.operateurs.model.Pizza;
+import fr.pizzeria.exception.DeletePizzaException;
+import fr.pizzeria.exception.UpdatePizzaException;
 
 public class ModifierPizzaService extends MenuService{
 	@Override
-	public void executeUC(IPizzaDao pizzaDao, Scanner scanner) {
+	public void executeUC(IPizzaDao pizzaDao, Scanner scanner) throws UpdatePizzaException {
 		System.out.println("Mise à jour d’une pizza");
 		System.out.println("Liste des pizzas :");
 		pizzaDao.toString();
@@ -17,10 +19,8 @@ public class ModifierPizzaService extends MenuService{
 		String iddModifier=scanner.nextLine();
 		System.out.println("Veuillez saisir le nom (sans espace) :");
 		String nomModifier=scanner.nextLine();
-
 		System.out.println("Veuillez saisir le prix :");
 		double  prixModifier= scanner.nextDouble();
-
 		Pizza Pizzamiseajour= new Pizza( iddModifier,nomModifier,prixModifier);
 		pizzaDao.updatePizza(idModifier, Pizzamiseajour);
 

@@ -3,6 +3,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import fr.operateurs.model.Pizza;
+import fr.pizzeria.exception.DeletePizzaException;
+import fr.pizzeria.exception.StockageException;
+import fr.pizzeria.exception.UpdatePizzaException;
 /**
  * @author cherif
  * Implementations de toutes  les fonctions de java  pour le programme Pizza 
@@ -19,30 +22,36 @@ public class PizzaMemDao implements IPizzaDao {
 	}
 	@Override
 	/**Enregistrer une  pizza**/
-	public void saveNewPizza(Pizza pizza) {
+	public void saveNewPizza(Pizza pizza)  {
 		menu.add(pizza);
+	
 	}
 	@Override
 	/**modifier  une  pizza**/
-	public void updatePizza(String codePizza, Pizza pizza) {
+	public void updatePizza(String codePizza, Pizza pizza) throws UpdatePizzaException {
 
 		for(int i=0;i<menu.size();i++){
 
-			if((menu.get(i).code).equals(codePizza)){
+			if(menu.get(i).code.equals(codePizza)){
 				menu.add(pizza);
+				return;
 			}
 		}
+		throw new UpdatePizzaException("je pourrais pas faire la mise a jour ");
+	
+
 	}
 	@Override
 	/**Suprimer  une  pizza**/
-	public void deletePizza(String codePizza) {
+	public void deletePizza(String codePizza) throws DeletePizzaException {
 
 		for(int i=0;i<menu.size();i++){
-			if((menu.get(i).code).equals(codePizza)){
+			if(!(menu.get(i).code).equals(codePizza)){
 				menu.remove(codePizza);
+				return;
 			}
 		}
-
+		throw new DeletePizzaException("la pizza n'a pas été trouvée");
 	}
 
 	@Override
@@ -54,7 +63,7 @@ public class PizzaMemDao implements IPizzaDao {
 				idPizza=i;
 			}
 		}
-		return menu.get(idPizza) ;
+		return menu.get(idPizza);
 	}
 
 	@Override

@@ -7,6 +7,7 @@ import fr.operateurs.dao.PizzaMemDao;
 import fr.operateurs.model.Pizza;
 import fr.operateurs.service.MenuService;
 import fr.operateurs.service.MenuServiceFactory;
+import fr.pizzeria.exception.StockageException;
 
 /**
  * 
@@ -50,12 +51,16 @@ public class PizzeriaAdminConsoleApp {
 			System.out.println("3. Mettre à jour une pizza");
 			System.out.println("4. Supprimer une pizza");
 			System.out.println("99. Sortir");
-
 			choice = choiceMenu.nextInt();
-
 			MenuService service= MenuServiceFactory.getService(choice);
 			if(service !=null){
-				service.executeUC(pizzaDao, reader);
+				
+				try {
+					service.executeUC(pizzaDao, reader);
+				} catch (StockageException e) {
+					System.out.println(e.getMessage());
+					e.printStackTrace();
+				}
 			}
 			if (choice == 99){
 				System.out.println("Aurevoir ☹»");

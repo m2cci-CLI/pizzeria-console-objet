@@ -5,15 +5,14 @@ import java.util.Scanner;
 import fr.operateurs.dao.IPizzaDao;
 import fr.operateurs.dao.PizzaMemDao;
 import fr.operateurs.model.Pizza;
-import fr.operateurs.service.AjouterPizzaService;
-import fr.operateurs.service.ListerPizzasService;
 import fr.operateurs.service.MenuService;
 import fr.operateurs.service.MenuServiceFactory;
-import fr.operateurs.service.ModifierPizzaService;
-import fr.operateurs.service.SupprimerPizzaService;
+
 /**
  * 
  * @author cherif
+ * 
+ * 
  *
  */
 
@@ -40,10 +39,10 @@ public class PizzeriaAdminConsoleApp {
 		pizzaDao.saveNewPizza(p5);
 		pizzaDao.saveNewPizza(p6);
 		pizzaDao.saveNewPizza(p7);
+		pizzaDao.saveNewPizza(p8);
 		Scanner choiceMenu = new Scanner(System.in);	
 		Scanner reader = new Scanner(System.in);
 		int choice = 0;
-		MenuServiceFactory menuChoix= new MenuServiceFactory();
 
 		while (true) {
 			System.out.println("1. Lister les pizzas");
@@ -58,17 +57,14 @@ public class PizzeriaAdminConsoleApp {
 			if(service !=null){
 				service.executeUC(pizzaDao, reader);
 			}
-
 			if (choice == 99){
 				System.out.println("Aurevoir ☹»");
-				
-					break;
-				
+
+				break;	
 			}
 
-			
-
 		}
+		choiceMenu.close();
 	}
 
 }

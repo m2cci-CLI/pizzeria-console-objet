@@ -4,10 +4,12 @@ import java.util.Scanner;
 
 import fr.operateurs.dao.IPizzaDao;
 import fr.operateurs.dao.PizzaMemDao;
+import fr.operateurs.model.CategoriePizza;
 import fr.operateurs.model.Pizza;
 import fr.operateurs.service.MenuService;
 import fr.operateurs.service.MenuServiceFactory;
 import fr.pizzeria.exception.StockageException;
+import fr.operateurs.model.CategoriePizza;
 
 /**
  * 
@@ -18,18 +20,16 @@ import fr.pizzeria.exception.StockageException;
  */
 
 public class PizzeriaAdminConsoleApp {
-
 	public static void main(String[] args) {
 		IPizzaDao pizzaDao = new PizzaMemDao();
-
-		Pizza p1= new Pizza(0,"REP","Peperoni",12.5);
-		Pizza p2= new Pizza(1,"MAR","Margherita",14.0);
-		Pizza p3= new Pizza(2,"REIN","La Reine",11.5);
-		Pizza p4= new Pizza(3,"FRO","La 4 fromages",12.0);
-		Pizza p5= new Pizza(4,"CAN","La cannibale",12.5);
-		Pizza p6= new Pizza(5,"SAV","La savoyarde",13.0);
-		Pizza p7= new Pizza(6,"ORI","L’orientale",13.5);
-		Pizza p8= new Pizza(7,"IND","L’indienne",14.0);
+        Pizza p1= new Pizza(0,"REP","Peperoni",12.5,CategoriePizza.POISSON);
+		Pizza p2= new Pizza(1,"MAR","Margherita",14.0,CategoriePizza.SANS_VIANDE);
+		Pizza p3= new Pizza(2,"REIN","La Reine",11.5,CategoriePizza.VIANDE);
+		Pizza p4= new Pizza(3,"FRO","La 4 fromages",12.0,CategoriePizza.POISSON);
+		Pizza p5= new Pizza(4,"CAN","La cannibale",12.5,CategoriePizza.POISSON);
+		Pizza p6= new Pizza(5,"SAV","La savoyarde",13.5,CategoriePizza.VIANDE);
+		Pizza p7= new Pizza(6,"ORI","L’orientale",13.5,CategoriePizza.VIANDE);
+		Pizza p8= new Pizza(7,"IND","L’indienne",14.0,CategoriePizza.POISSON);
 
 		/** creation de tableau d'objet**/ 
 

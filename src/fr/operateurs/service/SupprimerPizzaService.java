@@ -12,8 +12,7 @@ public class SupprimerPizzaService  extends MenuService {
 		System.out.println("Suppression d’une pizza");
 		System.out.println("Veuillez choisir le code de la pizza à supprimer ");
 		String idSuprimer=scanner.nextLine();
-		pizzaDao.pizzaExists(idSuprimer);
-			
+		pizzaDao.pizzaExists(idSuprimer);	
 		pizzaDao.deletePizza(idSuprimer);
 	}
 }
